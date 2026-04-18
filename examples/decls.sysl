@@ -1,0 +1,7 @@
+arcana :: namespace {
+  cursor :: struct {
+    content: []u8,
+    len: u64,
+  }
+}
+
