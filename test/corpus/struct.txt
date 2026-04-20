@@ -1,0 +1,43 @@
+===
+empty declaration
+===
+unit :: struct {}
+---
+(source_file
+  (declaration
+    (identifier)
+    (struct)))
+
+===
+fields
+===
+position :: struct {
+  x: u32,
+  y: u32,
+}
+---
+(source_file
+  (declaration
+    (identifier)
+    (struct 
+      (struct_field (identifier) (int_type))
+      (struct_field (identifier) (int_type)))))
+
+===
+fields
+===
+position :: struct {
+  x: u32,
+  y: u32,
+
+  print :: (self) { }
+}
+---
+(source_file
+  (declaration
+    (identifier)
+    (struct 
+      (struct_field (identifier) (int_type))
+      (struct_field (identifier) (int_type))
+      (method (identifier) (self)))))
+

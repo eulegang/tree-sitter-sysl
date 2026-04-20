@@ -43,7 +43,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "type"
+          "name": "_type"
         },
         {
           "type": "STRING",
@@ -76,7 +76,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "type"
+          "name": "_type"
         },
         {
           "type": "STRING",
@@ -397,6 +397,10 @@
         {
           "type": "SYMBOL",
           "name": "method"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "function"
         }
       ]
     },
@@ -413,7 +417,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "type"
+          "name": "_type"
         },
         {
           "type": "STRING",
@@ -473,9 +477,9 @@
     },
     "identifier": {
       "type": "PATTERN",
-      "value": "[a-zA-Z_]+[a-zA-Z_0-9]"
+      "value": "[a-zA-Z_][a-zA-Z_0-9]*"
     },
-    "type": {
+    "_type": {
       "type": "CHOICE",
       "members": [
         {
@@ -517,7 +521,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "type"
+          "name": "_type"
         }
       ]
     },
@@ -601,7 +605,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "type"
+                "name": "_type"
               }
             ]
           }
@@ -622,7 +626,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "type"
+                  "name": "_type"
                 }
               ]
             },
@@ -656,7 +660,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "type"
+                  "name": "_type"
                 },
                 {
                   "type": "REPEAT",
@@ -677,7 +681,7 @@
                       },
                       {
                         "type": "SYMBOL",
-                        "name": "type"
+                        "name": "_type"
                       }
                     ]
                   }
@@ -705,7 +709,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "type"
+                  "name": "_type"
                 }
               ]
             },

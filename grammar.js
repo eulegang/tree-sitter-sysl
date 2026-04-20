@@ -28,7 +28,7 @@ export default grammar({
       'let',
       $.identifier,
       ':',
-      $.type,
+      $._type,
       '=',
       $._lit,
       ';'
@@ -38,7 +38,7 @@ export default grammar({
       'mut',
       $.identifier,
       ':',
-      $.type,
+      $._type,
       '=',
       $._lit,
       ';'
@@ -116,13 +116,14 @@ export default grammar({
 
     _struct_part: $ => choice(
       $.struct_field,
-      $.method
+      $.method,
+      $.function,
     ),
 
     struct_field: $ => seq(
       $.identifier,
       ':',
-      $.type,
+      $._type,
       ','
     ),
 
@@ -143,9 +144,9 @@ export default grammar({
     ),
 
 
-    identifier: $ => /[a-zA-Z_]+[a-zA-Z_0-9]/,
+    identifier: $ => /[a-zA-Z_][a-zA-Z_0-9]*/,
 
-    type: $ => choice(
+    _type: $ => choice(
       $.int_type,
       $.bool_type,
       $.float_type,
@@ -155,7 +156,7 @@ export default grammar({
     int_type: $ => /(i|u)(8|16|32|64)/,
     bool_type: $ => "bool",
     float_type: $ => /f(32|64)/,
-    slice_type: $ => seq('[]', $.type),
+    slice_type: $ => seq('[]', $._type),
 
 
     _lit: $ => choice(
@@ -180,12 +181,12 @@ export default grammar({
         ',',
         $.identifier,
         ':',
-        $.type,
+        $._type,
       )),
       ')',
       optional(seq(
         '->',
-        $.type,
+        $._type,
       )
       )
     ),
@@ -195,17 +196,17 @@ export default grammar({
       optional(seq(
         $.identifier,
         ':',
-        $.type,
+        $._type,
         repeat(seq(
           ',',
           $.identifier,
           ':',
-          $.type,
+          $._type,
         )))),
       ')',
       optional(seq(
         '->',
-        $.type,
+        $._type,
       ))),
 
 
