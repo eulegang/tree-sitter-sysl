@@ -1,11 +1,12 @@
+
 ======
-namespace
+empty
 ======
-arcana :: namespace { }
+do_nothing :: () { }
 -----
 
 (source_file
   (declaration
     (identifier)
-    (namespace)))
+    (function)))
 

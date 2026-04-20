@@ -1,0 +1,11 @@
+
+======
+return
+======
+life :: () -> u32 { return 42; }
+-----
+
+(source_file
+  (declaration
+    (identifier)
+    (function (int_type) (return (integer)))))

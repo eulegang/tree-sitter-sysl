@@ -22,6 +22,7 @@ export default grammar({
       $.constant,
       $.variable,
       $.declaration,
+      $.function,
     ),
 
     constant: $ => seq(
@@ -52,6 +53,7 @@ export default grammar({
         $.struct,
         $.enum,
         $.bitset,
+        $.function,
       ),
     ),
 
@@ -101,7 +103,7 @@ export default grammar({
     _enum_part: $ => choice(
       $.enum_variant,
       $.method,
-      $.function
+      seq($.identifier, '::', $.function)
     ),
 
     enum_variant: $ => seq($.identifier, optional(seq('=', $._lit)), ","),
@@ -136,10 +138,9 @@ export default grammar({
     ),
 
     function: $ => seq(
-      $.identifier,
-      '::',
       $._function_sig,
       '{',
+      optional($._statements),
       '}'
     ),
 
@@ -209,6 +210,18 @@ export default grammar({
         $._type,
       ))),
 
+    _statements: $ => repeat1($._statement),
+
+    _statement: $ => choice(
+      $.return
+    ),
+
+    return: $ => seq('return', $._expr, ';'),
+
+
+    _expr: $ => choice(
+      $._lit,
+    ),
 
     comment: $ =>
       token(

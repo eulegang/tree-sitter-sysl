@@ -79,4 +79,4 @@ action :: enum {
     (identifier)
     (enum 
       (enum_variant (identifier))
-      (function (identifier)))))
+      (identifier) (function))))
