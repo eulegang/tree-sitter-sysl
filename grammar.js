@@ -50,6 +50,8 @@ export default grammar({
       choice(
         $.namespace,
         $.struct,
+        $.enum,
+        $.bitset,
       ),
     ),
 
@@ -65,6 +67,29 @@ export default grammar({
       ),
     ),
 
+    bitset: $ => seq(
+      'bitset',
+      '{',
+      '}'
+    ),
+
+    enum: $ => seq(
+      'enum',
+      optional(seq('(', $.int_type, ')')),
+      '{',
+      repeat($._enum_part),
+      '}',
+    ),
+
+    _enum_part: $ => choice(
+      $.enum_variant,
+      $.method,
+      $.function
+    ),
+
+    enum_variant: $ => seq($.identifier, optional(seq('=', $._lit)), ","),
+
+
     struct: $ => seq(
       'struct',
       '{',
@@ -74,6 +99,7 @@ export default grammar({
 
     _struct_part: $ => choice(
       $.struct_field,
+      $.method
     ),
 
     struct_field: $ => seq(
@@ -82,6 +108,23 @@ export default grammar({
       $.type,
       ','
     ),
+
+    method: $ => seq(
+      $.identifier,
+      '::',
+      $._method_sig,
+      '{',
+      '}'
+    ),
+
+    function: $ => seq(
+      $.identifier,
+      '::',
+      $._function_sig,
+      '{',
+      '}'
+    ),
+
 
     identifier: $ => /[a-zA-Z_]+[a-zA-Z_0-9]/,
 
@@ -108,7 +151,48 @@ export default grammar({
     bool: $ => /(true|false)/,
     float: $ => /[0-9]+\.[0-9]+/,
 
-    comment: ($) =>
+    self: $ => seq(
+      optional('*'),
+      'self'
+    ),
+
+    _method_sig: $ => seq(
+      '(',
+      $.self,
+      repeat(seq(
+        ',',
+        $.identifier,
+        ':',
+        $.type,
+      )),
+      ')',
+      optional(seq(
+        '->',
+        $.type,
+      )
+      )
+    ),
+
+    _function_sig: $ => seq(
+      '(',
+      optional(seq(
+        $.identifier,
+        ':',
+        $.type,
+        repeat(seq(
+          ',',
+          $.identifier,
+          ':',
+          $.type,
+        )))),
+      ')',
+      optional(seq(
+        '->',
+        $.type,
+      ))),
+
+
+    comment: $ =>
       token(
         choice(seq("//", /.*/), seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/")),
       ),

@@ -1,7 +1,7 @@
 
 ["let" "mut" "namespace" "struct"] @keyword
 
-(identifier) @tag
+(identifier) @variable
 
 ["::" ","  ":"] @punctuation
 

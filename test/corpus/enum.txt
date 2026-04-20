@@ -1,0 +1,82 @@
+===
+empty declaration
+===
+token :: enum { }
+---
+(source_file
+  (declaration
+    (identifier)
+    (enum)))
+
+===
+implied variant
+===
+token :: enum {
+  KEYWORD,
+}
+---
+(source_file
+  (declaration
+    (identifier)
+    (enum
+      (enum_variant (identifier))
+      )))
+
+
+===
+explicit variant
+===
+token :: enum {
+  KEYWORD = 1,
+}
+---
+(source_file
+  (declaration
+    (identifier)
+    (enum
+      (enum_variant (identifier) (integer)))))
+
+===
+explicit backing
+===
+token :: enum(u8) {
+  KEYWORD = 1,
+}
+---
+(source_file
+  (declaration
+    (identifier)
+    (enum (int_type)
+      (enum_variant (identifier) (integer)))))
+
+===
+enum method 
+===
+action :: enum {
+  nothing,
+
+  take :: (self) {}
+}
+---
+(source_file
+  (declaration
+    (identifier)
+    (enum 
+      (enum_variant (identifier))
+      (method (identifier) (self)))))
+
+===
+enum function 
+===
+action :: enum {
+  nothing,
+
+  take :: () {}
+}
+---
+(source_file
+  (declaration
+    (identifier)
+    (enum 
+      (enum_variant (identifier))
+      (function (identifier)))))

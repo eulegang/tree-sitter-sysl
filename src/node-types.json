@@ -1,5 +1,10 @@
 [
   {
+    "type": "bitset",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "constant",
     "named": true,
     "fields": {},
@@ -39,6 +44,14 @@
       "required": true,
       "types": [
         {
+          "type": "bitset",
+          "named": true
+        },
+        {
+          "type": "enum",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -48,6 +61,102 @@
         },
         {
           "type": "struct",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "enum",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "enum_variant",
+          "named": true
+        },
+        {
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "int_type",
+          "named": true
+        },
+        {
+          "type": "method",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "enum_variant",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bool",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "integer",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "function",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "method",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "self",
+          "named": true
+        },
+        {
+          "type": "type",
           "named": true
         }
       ]
@@ -75,6 +184,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "self",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "slice_type",
@@ -123,6 +237,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "method",
+          "named": true
+        },
         {
           "type": "struct_field",
           "named": true
@@ -208,7 +326,23 @@
     }
   },
   {
+    "type": "(",
+    "named": false
+  },
+  {
+    "type": ")",
+    "named": false
+  },
+  {
+    "type": "*",
+    "named": false
+  },
+  {
     "type": ",",
+    "named": false
+  },
+  {
+    "type": "->",
     "named": false
   },
   {
@@ -232,6 +366,10 @@
     "named": false
   },
   {
+    "type": "bitset",
+    "named": false
+  },
+  {
     "type": "bool",
     "named": true
   },
@@ -243,6 +381,10 @@
     "type": "comment",
     "named": true,
     "extra": true
+  },
+  {
+    "type": "enum",
+    "named": false
   },
   {
     "type": "float",
@@ -274,6 +416,10 @@
   },
   {
     "type": "namespace",
+    "named": false
+  },
+  {
+    "type": "self",
     "named": false
   },
   {

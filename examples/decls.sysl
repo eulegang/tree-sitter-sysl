@@ -1,7 +1,9 @@
 arcana :: namespace {
   cursor :: struct {
     content: []u8,
-    len: u64,
+    cursor: u32,
+
+    advance :: (self, amount: u32) { }
   }
 }
 

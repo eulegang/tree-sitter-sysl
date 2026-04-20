@@ -1,0 +1,30 @@
+======
+namespace
+======
+arcana :: namespace { }
+-----
+
+(source_file
+  (declaration
+    (identifier)
+    (namespace)))
+
+===
+struct
+===
+cursor :: struct { }
+---
+(source_file
+  (declaration
+    (identifier)
+    (struct)))
+
+===
+bitset
+===
+token :: bitset { }
+---
+(source_file
+  (declaration
+    (identifier)
+    (bitset)))
