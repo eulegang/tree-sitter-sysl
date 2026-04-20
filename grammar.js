@@ -69,8 +69,25 @@ export default grammar({
 
     bitset: $ => seq(
       'bitset',
+      optional(seq('(', $.int_type, ')')),
       '{',
+      repeat($._bitset_part),
       '}'
+    ),
+
+    _bitset_part: $ => choice(
+      $.method,
+      $.function,
+      $.bitset_bit,
+    ),
+
+    bitset_bit: $ => seq(
+      $.identifier,
+      optional(seq(
+        '=',
+        $._lit,
+      )),
+      ',',
     ),
 
     enum: $ => seq(

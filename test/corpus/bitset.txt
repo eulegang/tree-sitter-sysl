@@ -1,0 +1,66 @@
+===
+empty declaration
+===
+options :: bitset {}
+---
+(source_file
+  (declaration
+    (identifier)
+    (bitset)))
+
+===
+implicit bit
+===
+options :: bitset {
+  verbose,
+}
+---
+(source_file
+  (declaration
+    (identifier)
+    (bitset
+    (bitset_bit (identifier))
+    )))
+
+===
+explicit bit
+===
+options :: bitset {
+  verbose = 3,
+}
+---
+(source_file
+  (declaration
+    (identifier)
+    (bitset
+    (bitset_bit (identifier) (integer)))))
+
+===
+backing type
+===
+options :: bitset(u8) {
+  verbose,
+}
+---
+(source_file
+  (declaration
+    (identifier)
+    (bitset (int_type)
+    (bitset_bit (identifier)))))
+
+===
+method
+===
+options :: bitset {
+  verbose,
+
+  print_action :: (self) {}
+}
+---
+(source_file
+  (declaration
+    (identifier)
+    (bitset 
+      (bitset_bit (identifier))
+      (method (identifier) (self)))))
+
