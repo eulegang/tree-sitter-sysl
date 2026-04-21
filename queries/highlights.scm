@@ -1,16 +1,40 @@
-
-["let" "mut" "namespace" "struct"] @keyword
-
 (identifier) @variable
 
-["::" ","  ":"] @punctuation
+["let" "mut"] @keyword
 
-["{" "}"] @punctuation.bracket
+["namespace" "struct" "enum" "bitset"] @keyword.type
+"return" @keyword.return
+
+[
+  "if"
+  "else"
+  "defer"
+
+] @keyword.conditional
+
+
+
+[
+  "("
+  ")"
+  "{"
+  "}"
+] @punctuation.bracket
+
+["::" ","  ":" "->"] @punctuation.delimiter
+
+
+(integer) @number
+
+(declaration (identifier) @function (function) )
+(declaration (identifier) @module (namespace) )
+
+(function (identifier) @variable.parameter)
 
 [
  (int_type)
  (float_type)
  (bool_type)
- (slice_type)
- ] @type
+ ] @type.builtin
 
+(comment) @comment
