@@ -151,14 +151,46 @@ export default grammar({
       $.int_type,
       $.bool_type,
       $.float_type,
-      $.slice_type
+      $.slice_type,
+      $.identifier_type,
+      $.func_type,
     ),
 
-    int_type: $ => /(i|u)(8|16|32|64)/,
+    int_type: $ => choice(
+      'i8',
+      'i16',
+      'i32',
+      'i64',
+
+      'u8',
+      'u16',
+      'u32',
+      'u64',
+    ),
+
+    // /(i|u)(8|16|32|64)/,
     bool_type: $ => "bool",
-    float_type: $ => /f(32|64)/,
+    float_type: $ => choice(
+      "f32",
+      "f64",
+    ),
     slice_type: $ => seq('[]', $._type),
 
+    identifier_type: $ => seq($.identifier, repeat(seq('::', $.identifier))),
+
+    func_type: $ => seq(
+      '(',
+      optional(seq(
+        $._type,
+        repeat(seq(
+          ',',
+          $._type,
+        )))),
+      ')',
+      seq(
+        '->',
+        $._type,
+      )),
 
     _lit: $ => choice(
       $.integer,

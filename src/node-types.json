@@ -345,7 +345,15 @@
           "named": true
         },
         {
+          "type": "func_type",
+          "named": true
+        },
+        {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "identifier_type",
           "named": true
         },
         {
@@ -535,6 +543,46 @@
     }
   },
   {
+    "type": "float_type",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "func_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bool_type",
+          "named": true
+        },
+        {
+          "type": "float_type",
+          "named": true
+        },
+        {
+          "type": "func_type",
+          "named": true
+        },
+        {
+          "type": "identifier_type",
+          "named": true
+        },
+        {
+          "type": "int_type",
+          "named": true
+        },
+        {
+          "type": "slice_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "function",
     "named": true,
     "fields": {},
@@ -567,7 +615,15 @@
           "named": true
         },
         {
+          "type": "func_type",
+          "named": true
+        },
+        {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "identifier_type",
           "named": true
         },
         {
@@ -590,6 +646,26 @@
     }
   },
   {
+    "type": "identifier_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "int_type",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "method",
     "named": true,
     "fields": {},
@@ -606,7 +682,15 @@
           "named": true
         },
         {
+          "type": "func_type",
+          "named": true
+        },
+        {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "identifier_type",
           "named": true
         },
         {
@@ -727,6 +811,14 @@
           "named": true
         },
         {
+          "type": "func_type",
+          "named": true
+        },
+        {
+          "type": "identifier_type",
+          "named": true
+        },
+        {
           "type": "int_type",
           "named": true
         },
@@ -805,7 +897,15 @@
           "named": true
         },
         {
+          "type": "func_type",
+          "named": true
+        },
+        {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "identifier_type",
           "named": true
         },
         {
@@ -852,7 +952,15 @@
           "named": true
         },
         {
+          "type": "func_type",
+          "named": true
+        },
+        {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "identifier_type",
           "named": true
         },
         {
@@ -944,6 +1052,14 @@
     "named": false
   },
   {
+    "type": "f32",
+    "named": false
+  },
+  {
+    "type": "f64",
+    "named": false
+  },
+  {
     "type": "false",
     "named": false
   },
@@ -952,8 +1068,20 @@
     "named": true
   },
   {
-    "type": "float_type",
-    "named": true
+    "type": "i16",
+    "named": false
+  },
+  {
+    "type": "i32",
+    "named": false
+  },
+  {
+    "type": "i64",
+    "named": false
+  },
+  {
+    "type": "i8",
+    "named": false
   },
   {
     "type": "identifier",
@@ -962,10 +1090,6 @@
   {
     "type": "if",
     "named": false
-  },
-  {
-    "type": "int_type",
-    "named": true
   },
   {
     "type": "integer",
@@ -997,6 +1121,22 @@
   },
   {
     "type": "true",
+    "named": false
+  },
+  {
+    "type": "u16",
+    "named": false
+  },
+  {
+    "type": "u32",
+    "named": false
+  },
+  {
+    "type": "u64",
+    "named": false
+  },
+  {
+    "type": "u8",
     "named": false
   },
   {

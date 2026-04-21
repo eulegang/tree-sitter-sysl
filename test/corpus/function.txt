@@ -10,3 +10,30 @@ do_nothing :: () { }
     (identifier)
     (function)))
 
+======
+args
+======
+do_nothing :: (id: u32) { }
+-----
+
+(source_file
+  (declaration
+    (identifier)
+    (function
+      (identifier)
+      (int_type))))
+
+
+======
+higher-order-functions
+======
+do_nothing :: (id: (u32) -> bool) { }
+-----
+
+(source_file
+  (declaration
+    (identifier)
+    (function
+      (identifier)
+      (func_type (int_type) (bool_type)))))
+
