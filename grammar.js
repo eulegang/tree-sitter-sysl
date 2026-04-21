@@ -167,7 +167,7 @@ export default grammar({
     ),
 
     integer: $ => /[0-9]+/,
-    bool: $ => /(true|false)/,
+    bool: $ => choice("true", "false"),
     float: $ => /[0-9]+\.[0-9]+/,
 
     self: $ => seq(
@@ -213,15 +213,45 @@ export default grammar({
     _statements: $ => repeat1($._statement),
 
     _statement: $ => choice(
-      $.return
+      $.return,
+      $.defer,
     ),
 
     return: $ => seq('return', $._expr, ';'),
+    defer: $ => seq('defer',
+      choice(
+        seq('{', optional($._statements), '}'),
+        seq($._expr, ';'))),
 
 
     _expr: $ => choice(
       $._lit,
+      $.identifier,
+      $.name_resolution,
+      $.field_resolution,
+      $.call,
     ),
+
+    name_resolution: $ =>
+      seq($.identifier, repeat1(seq('::', $.identifier))),
+
+    field_resolution: $ =>
+      seq($.identifier, repeat1(seq('.', $.identifier))),
+
+    call: $ =>
+      seq(
+        field("func", $._expr),
+        '(',
+        field("params", optional(seq(
+          $._expr,
+          repeat(seq(
+            ',',
+            $._expr,
+          )),
+        )),
+        ),
+        ')',
+      ),
 
     comment: $ =>
       token(

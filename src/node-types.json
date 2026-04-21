@@ -54,6 +54,89 @@
     }
   },
   {
+    "type": "bool",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "call",
+    "named": true,
+    "fields": {
+      "func": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "bool",
+            "named": true
+          },
+          {
+            "type": "call",
+            "named": true
+          },
+          {
+            "type": "field_resolution",
+            "named": true
+          },
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "name_resolution",
+            "named": true
+          }
+        ]
+      },
+      "params": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "bool",
+            "named": true
+          },
+          {
+            "type": "call",
+            "named": true
+          },
+          {
+            "type": "field_resolution",
+            "named": true
+          },
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "name_resolution",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "constant",
     "named": true,
     "fields": {},
@@ -132,6 +215,53 @@
     }
   },
   {
+    "type": "defer",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "bool",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
+          "type": "defer",
+          "named": true
+        },
+        {
+          "type": "field_resolution",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "integer",
+          "named": true
+        },
+        {
+          "type": "name_resolution",
+          "named": true
+        },
+        {
+          "type": "return",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "enum",
     "named": true,
     "fields": {},
@@ -190,6 +320,21 @@
     }
   },
   {
+    "type": "field_resolution",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "function",
     "named": true,
     "fields": {},
@@ -199,6 +344,10 @@
       "types": [
         {
           "type": "bool_type",
+          "named": true
+        },
+        {
+          "type": "defer",
           "named": true
         },
         {
@@ -260,6 +409,21 @@
     }
   },
   {
+    "type": "name_resolution",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "namespace",
     "named": true,
     "fields": {},
@@ -299,11 +463,27 @@
           "named": true
         },
         {
+          "type": "call",
+          "named": true
+        },
+        {
+          "type": "field_resolution",
+          "named": true
+        },
+        {
           "type": "float",
           "named": true
         },
         {
+          "type": "identifier",
+          "named": true
+        },
+        {
           "type": "integer",
+          "named": true
+        },
+        {
+          "type": "name_resolution",
           "named": true
         }
       ]
@@ -487,6 +667,10 @@
     "named": false
   },
   {
+    "type": ".",
+    "named": false
+  },
+  {
     "type": ":",
     "named": false
   },
@@ -511,10 +695,6 @@
     "named": false
   },
   {
-    "type": "bool",
-    "named": true
-  },
-  {
     "type": "bool_type",
     "named": true
   },
@@ -524,7 +704,15 @@
     "extra": true
   },
   {
+    "type": "defer",
+    "named": false
+  },
+  {
     "type": "enum",
+    "named": false
+  },
+  {
+    "type": "false",
     "named": false
   },
   {
@@ -569,6 +757,10 @@
   },
   {
     "type": "struct",
+    "named": false
+  },
+  {
+    "type": "true",
     "named": false
   },
   {

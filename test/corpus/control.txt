@@ -1,4 +1,3 @@
-
 ======
 return
 ======
@@ -9,3 +8,17 @@ life :: () -> u32 { return 42; }
   (declaration
     (identifier)
     (function (int_type) (return (integer)))))
+
+======
+defer expression
+======
+life :: () -> u32 { 
+  defer 32;
+}
+-----
+
+(source_file
+  (declaration
+    (identifier)
+    (function (int_type) (defer (integer)))))
+
