@@ -1,0 +1,58 @@
+======
+global const
+======
+let i: u32 = 32;
+-----
+
+(source_file
+  (constant
+    (identifier)
+    (int_type)
+    (integer)))
+
+======
+global variable
+======
+mut i: u32 = 32;
+-----
+
+(source_file
+  (variable
+    (identifier)
+    (int_type)
+    (integer)))
+
+======
+local const
+======
+main :: () {
+  let i: u32 = 32;
+}
+-----
+
+(source_file
+  (declaration
+    (identifier)
+    (function
+      (constant
+      (identifier)
+      (int_type)
+      (integer)))))
+
+======
+local var
+======
+main :: () {
+  mut i: u32 = 32;
+}
+-----
+
+(source_file
+  (declaration
+    (identifier)
+    (function
+      (variable
+      (identifier)
+      (int_type)
+      (integer)))))
+

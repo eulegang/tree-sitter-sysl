@@ -180,6 +180,10 @@
           "named": true
         },
         {
+          "type": "constant",
+          "named": true
+        },
+        {
           "type": "defer",
           "named": true
         },
@@ -206,6 +210,10 @@
         {
           "type": "return",
           "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
         }
       ]
     }
@@ -227,11 +235,19 @@
           "named": true
         },
         {
+          "type": "constant",
+          "named": true
+        },
+        {
           "type": "defer",
           "named": true
         },
         {
           "type": "return",
+          "named": true
+        },
+        {
+          "type": "variable",
           "named": true
         }
       ]
@@ -258,6 +274,10 @@
           "named": true
         },
         {
+          "type": "constant",
+          "named": true
+        },
+        {
           "type": "defer",
           "named": true
         },
@@ -284,6 +304,10 @@
         {
           "type": "return",
           "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
         }
       ]
     }
@@ -305,6 +329,14 @@
           "named": true
         },
         {
+          "type": "call",
+          "named": true
+        },
+        {
+          "type": "field_resolution",
+          "named": true
+        },
+        {
           "type": "float",
           "named": true
         },
@@ -322,6 +354,10 @@
         },
         {
           "type": "integer",
+          "named": true
+        },
+        {
+          "type": "name_resolution",
           "named": true
         },
         {
@@ -387,6 +423,10 @@
           "named": true
         },
         {
+          "type": "constant",
+          "named": true
+        },
+        {
           "type": "defer",
           "named": true
         },
@@ -412,6 +452,10 @@
         },
         {
           "type": "return",
+          "named": true
+        },
+        {
+          "type": "variable",
           "named": true
         }
       ]
@@ -511,6 +555,10 @@
           "named": true
         },
         {
+          "type": "constant",
+          "named": true
+        },
+        {
           "type": "defer",
           "named": true
         },
@@ -532,6 +580,10 @@
         },
         {
           "type": "slice_type",
+          "named": true
+        },
+        {
+          "type": "variable",
           "named": true
         }
       ]
@@ -784,6 +836,14 @@
           "named": true
         },
         {
+          "type": "call",
+          "named": true
+        },
+        {
+          "type": "field_resolution",
+          "named": true
+        },
+        {
           "type": "float",
           "named": true
         },
@@ -801,6 +861,10 @@
         },
         {
           "type": "integer",
+          "named": true
+        },
+        {
+          "type": "name_resolution",
           "named": true
         },
         {

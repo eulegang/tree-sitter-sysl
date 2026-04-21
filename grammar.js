@@ -31,7 +31,7 @@ export default grammar({
       ':',
       $._type,
       '=',
-      $._lit,
+      $._expr,
       ';'
     ),
 
@@ -41,7 +41,7 @@ export default grammar({
       ':',
       $._type,
       '=',
-      $._lit,
+      $._expr,
       ';'
     ),
 
@@ -217,6 +217,8 @@ export default grammar({
       $.defer,
       seq($.call, ';'),
       $.cond,
+      $.constant,
+      $.variable,
     ),
 
     return: $ => seq('return', $._expr, ';'),
