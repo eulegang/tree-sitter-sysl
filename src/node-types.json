@@ -137,6 +137,158 @@
     }
   },
   {
+    "type": "cond",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "cond_elif",
+          "named": true
+        },
+        {
+          "type": "cond_else",
+          "named": true
+        },
+        {
+          "type": "cond_if",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "cond_elif",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bool",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
+          "type": "cond",
+          "named": true
+        },
+        {
+          "type": "defer",
+          "named": true
+        },
+        {
+          "type": "field_resolution",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "integer",
+          "named": true
+        },
+        {
+          "type": "name_resolution",
+          "named": true
+        },
+        {
+          "type": "return",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "cond_else",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "call",
+          "named": true
+        },
+        {
+          "type": "cond",
+          "named": true
+        },
+        {
+          "type": "defer",
+          "named": true
+        },
+        {
+          "type": "return",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "cond_if",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bool",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
+          "type": "cond",
+          "named": true
+        },
+        {
+          "type": "defer",
+          "named": true
+        },
+        {
+          "type": "field_resolution",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "integer",
+          "named": true
+        },
+        {
+          "type": "name_resolution",
+          "named": true
+        },
+        {
+          "type": "return",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "constant",
     "named": true,
     "fields": {},
@@ -228,6 +380,10 @@
         },
         {
           "type": "call",
+          "named": true
+        },
+        {
+          "type": "cond",
           "named": true
         },
         {
@@ -344,6 +500,14 @@
       "types": [
         {
           "type": "bool_type",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
+          "type": "cond",
           "named": true
         },
         {
@@ -708,6 +872,10 @@
     "named": false
   },
   {
+    "type": "else",
+    "named": false
+  },
+  {
     "type": "enum",
     "named": false
   },
@@ -726,6 +894,10 @@
   {
     "type": "identifier",
     "named": true
+  },
+  {
+    "type": "if",
+    "named": false
   },
   {
     "type": "int_type",

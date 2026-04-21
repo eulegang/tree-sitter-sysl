@@ -215,6 +215,8 @@ export default grammar({
     _statement: $ => choice(
       $.return,
       $.defer,
+      seq($.call, ';'),
+      $.cond,
     ),
 
     return: $ => seq('return', $._expr, ';'),
@@ -223,6 +225,35 @@ export default grammar({
         seq('{', optional($._statements), '}'),
         seq($._expr, ';'))),
 
+    cond: $ => seq(
+      $.cond_if,
+      repeat($.cond_elif),
+      optional($.cond_else)
+    ),
+
+    cond_if: $ => seq(
+      'if',
+      $._expr,
+      '{',
+      optional($._statements),
+      '}',
+    ),
+
+    cond_elif: $ => seq(
+      'else',
+      'if',
+      $._expr,
+      '{',
+      optional($._statements),
+      '}'
+    ),
+
+    cond_else: $ => seq(
+      'else',
+      '{',
+      optional($._statements),
+      '}'
+    ),
 
     _expr: $ => choice(
       $._lit,

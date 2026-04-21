@@ -1,7 +1,7 @@
 ======
 return
 ======
-life :: () -> u32 { return 42; }
+main :: () -> u32 { return 42; }
 -----
 
 (source_file
@@ -9,16 +9,133 @@ life :: () -> u32 { return 42; }
     (identifier)
     (function (int_type) (return (integer)))))
 
+===
+if
+===
+
+main :: () -> u32 { 
+  if works {
+    do_the_thing();
+  }
+}
+---
+
+(source_file
+  (declaration
+    (identifier)
+    (function (int_type) 
+      (cond 
+        (cond_if
+          (identifier) 
+          (call (identifier)))))))
+
+===
+else
+===
+
+main :: () -> u32 { 
+  if works {
+    do_the_thing();
+  } else {
+    do_the_other_thing();
+  }
+}
+---
+
+(source_file
+  (declaration
+    (identifier)
+    (function (int_type) 
+      (cond 
+        (cond_if 
+          (identifier) 
+          (call (identifier)))
+        (cond_else (call (identifier)))
+          ))))
+
+===
+else if
+===
+
+main :: () -> u32 { 
+  if works {
+    do_the_thing();
+  } else if is_offline {
+    reconnect();
+  } else {
+    do_the_other_thing();
+  }
+}
+---
+
+(source_file
+  (declaration
+    (identifier)
+    (function (int_type) 
+      (cond 
+
+        (cond_if (identifier) 
+          (call (identifier)))
+        (cond_elif (identifier) 
+          (call (identifier)))
+        (cond_else 
+          (call (identifier)))))))
+
+===
+nesting if
+===
+
+main :: () -> u32 { 
+  if works {
+    if premium {
+      do_the_thing();
+    } else {
+      regular_thing();
+    }
+  }
+}
+---
+
+(source_file
+  (declaration
+    (identifier)
+    (function (int_type) 
+      (cond 
+        (cond_if (identifier) 
+          (cond
+            (cond_if (identifier) (call (identifier)))
+            (cond_else (call (identifier)))))))))
+
+
 ======
 defer expression
 ======
-life :: () -> u32 { 
-  defer 32;
+main :: () -> u32 { 
+  defer conn.close();
 }
 -----
 
 (source_file
   (declaration
     (identifier)
-    (function (int_type) (defer (integer)))))
+    (function (int_type) 
+      (defer (call 
+        (field_resolution (identifier) (identifier)))))))
+
+======
+defer block
+======
+main :: () -> u32 { 
+  defer {
+    conn.close();
+  }
+}
+-----
+
+(source_file
+  (declaration
+    (identifier)
+    (function (int_type) 
+      (defer (call 
+        (field_resolution (identifier) (identifier)))))))
 
