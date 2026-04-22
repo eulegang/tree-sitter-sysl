@@ -12,6 +12,7 @@
 
 ] @keyword.conditional
 
+(self) @module
 
 
 [
@@ -21,7 +22,9 @@
   "}"
 ] @punctuation.bracket
 
-["::" ","  ":" "->"] @punctuation.delimiter
+[";" "::" ","  ":" "->"] @punctuation.delimiter
+
+["="] @operator
 
 
 (integer) @number

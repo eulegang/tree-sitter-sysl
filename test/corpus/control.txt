@@ -139,3 +139,156 @@ main :: () -> u32 {
       (defer (call 
         (field_resolution (identifier) (identifier)))))))
 
+
+===
+while loop
+===
+main :: () -> u32 { 
+  while true {
+    do_it_again();
+  }
+}
+---
+(source_file
+  (declaration
+    (identifier)
+    (function (int_type) 
+      (while (bool) 
+        (call (identifier))))))
+
+===
+break
+===
+main :: () -> u32 { 
+  while true {
+    if broken {
+        break;
+    }
+  }
+}
+---
+(source_file
+  (declaration
+    (identifier)
+    (function (int_type) 
+      (while (bool) 
+        (cond (cond_if (identifier) (break)))))))
+
+===
+break
+===
+main :: () -> u32 { 
+  while true {
+    if broken {
+        continue;
+    }
+  }
+}
+---
+(source_file
+  (declaration
+    (identifier)
+    (function (int_type) 
+      (while (bool) 
+        (cond (cond_if (identifier) (continue)))))))
+
+===
+match
+===
+
+main :: () -> u32 {
+  match cur {
+    case 0:
+      print(42);
+  }
+}
+
+---
+
+(source_file 
+  (declaration 
+    (identifier)
+    (function (int_type)
+      (match (identifier)
+        (match_arm (integer)
+          (call (identifier) (integer)))))))
+
+===
+match default
+===
+
+main :: () -> u32 {
+  match cur {
+    case 0:
+      print(42);
+    default:
+      do_default();
+  }
+}
+
+---
+
+(source_file 
+  (declaration 
+    (identifier)
+    (function (int_type)
+      (match (identifier)
+        (match_arm (integer)
+          (call (identifier) (integer)))
+
+        (match_default
+          (call (identifier)))))))
+
+===
+match fallthrough
+===
+
+main :: () -> u32 {
+  match cur {
+    case 0: fallthrough;
+    case 1:
+      print(42);
+    default:
+      do_default();
+  }
+}
+
+---
+
+(source_file 
+  (declaration 
+    (identifier)
+    (function (int_type)
+      (match (identifier)
+        (match_arm (integer)
+          (match_fallthrough))
+        (match_arm (integer)
+          (call (identifier) (integer)))
+        (match_default
+          (call (identifier)))))))
+
+===
+match if
+===
+
+main :: () -> u32 {
+  match cur {
+    case 0 if present:
+      print(42);
+    default:
+      do_default();
+  }
+}
+
+---
+
+(source_file 
+  (declaration 
+    (identifier)
+    (function (int_type)
+      (match (identifier)
+        (match_arm (integer)
+          (match_if (identifier))
+          (call (identifier) (integer)))
+        (match_default
+          (call (identifier)))))))

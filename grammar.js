@@ -251,9 +251,15 @@ export default grammar({
       $.cond,
       $.constant,
       $.variable,
+      $.while,
+      $.break,
+      $.continue,
+      $.match,
     ),
 
     return: $ => seq('return', $._expr, ';'),
+    break: $ => seq('break', ';'),
+    continue: $ => seq('continue', ';'),
     defer: $ => seq('defer',
       choice(
         seq('{', optional($._statements), '}'),
@@ -287,6 +293,41 @@ export default grammar({
       '{',
       optional($._statements),
       '}'
+    ),
+
+    while: $ => seq(
+      'while',
+      $._expr,
+      '{',
+      optional($._statements),
+      '}'
+    ),
+
+    match: $ => seq(
+      'match',
+      $._expr,
+      '{',
+      repeat(choice($.match_arm, $.match_default)),
+      '}'
+    ),
+
+    match_arm: $ => seq(
+      'case',
+      $._lit,
+      optional($.match_if),
+      ':',
+      optional($._statements),
+      optional($.match_fallthrough),
+    ),
+
+    match_if: $ => seq('if', $._expr),
+
+    match_fallthrough: $ => seq('fallthrough', ';'),
+
+    match_default: $ => seq(
+      'default',
+      ':',
+      optional($._statements),
     ),
 
     _expr: $ => choice(
