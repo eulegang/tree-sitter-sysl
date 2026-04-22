@@ -292,3 +292,63 @@ main :: () -> u32 {
           (call (identifier) (integer)))
         (match_default
           (call (identifier)))))))
+
+===
+throw
+===
+
+doing_it :: () -> error!void {
+  throw error::invalid_token;
+}
+
+---
+
+(source_file
+  (declaration
+  (identifier)
+  (function
+    (function_sig_err (identifier_type (identifier)))
+    (void_type)
+    (throw 
+      (name_resolution (identifier) (identifier))))))
+
+===
+try
+===
+
+doing_it :: () -> error!void {
+  try sub_doing_it();
+}
+
+---
+
+(source_file
+  (declaration
+  (identifier)
+  (function
+    (function_sig_err (identifier_type (identifier)))
+    (void_type)
+    (try 
+      (call (identifier))))))
+
+===
+try
+===
+
+doing_it :: () -> error!void {
+  sub_doing_it() catch err {
+    return;
+  }
+}
+
+---
+
+(source_file
+  (declaration
+  (identifier)
+  (function
+    (function_sig_err (identifier_type (identifier)))
+    (void_type)
+    (catch  
+      (call (identifier)) 
+      (identifier) (return)))))

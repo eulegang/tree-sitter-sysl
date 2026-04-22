@@ -178,8 +178,10 @@ export default grammar({
       $.slice_type,
       $.identifier_type,
       $.func_type,
+      $.void_type,
     ),
 
+    void_type: $ => 'void',
     int_type: $ => choice(
       'i8',
       'i16',
@@ -243,6 +245,7 @@ export default grammar({
       ')',
       optional(seq(
         '->',
+        optional($.function_sig_err),
         $._type,
       )
       )
@@ -263,8 +266,15 @@ export default grammar({
       ')',
       optional(seq(
         '->',
+        optional($.function_sig_err),
         $._type,
       ))),
+
+
+    function_sig_err: $ => seq(
+      $._type,
+      '!'
+    ),
 
     _statements: $ => repeat1($._statement),
 
@@ -279,15 +289,22 @@ export default grammar({
       $.break,
       $.continue,
       $.match,
+      $.throw,
+      $.try,
+      $.catch,
     ),
 
-    return: $ => seq('return', $._expr, ';'),
-    break: $ => seq('break', ';'),
+    return: $ => seq('return', optional($._expr), ';'),
+    throw: $ => seq('throw', $._expr, ';'),
+    try: $ => seq('try', $._expr, ';'),
+    break: _ => seq('break', ';'),
     continue: $ => seq('continue', ';'),
     defer: $ => seq('defer',
       choice(
         seq('{', optional($._statements), '}'),
         seq($._expr, ';'))),
+
+    catch: $ => seq($._expr, 'catch', $.identifier, '{', optional($._statements), '}'),
 
     cond: $ => seq(
       $.cond_if,
