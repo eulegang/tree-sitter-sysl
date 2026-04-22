@@ -1,112 +1,42 @@
-======
-literal number
-======
-life :: () -> u32 { return 42; }
------
+===
+Addition
+===
+
+inc :: (x: u32) -> u32 {
+  return x + 1;
+}
+
+---
 
 (source_file
   (declaration
     (identifier)
-    (function (int_type) (return (integer)))))
-
-======
-literal boolean
-======
-life :: () -> bool { return true; }
------
-
-(source_file
-  (declaration
-    (identifier)
-    (function (bool_type) (return (bool)))))
-
-======
-literal float
-======
-life :: () -> f64 { return 0.95; }
------
-
-(source_file
-  (declaration
-    (identifier)
-    (function (float_type) (return (float)))))
-
-======
-identifier
-======
-life :: () -> f64 { return chances; }
------
-
-(source_file
-  (declaration
-    (identifier)
-    (function (float_type) (return (identifier)))))
-
-======
-namespace resolution
-======
-life :: () -> f64 { return math::pi; }
------
-
-(source_file
-  (declaration
-    (identifier)
-    (function 
-      (float_type) 
+    (function
+      (identifier)
+      (int_type)
+      (int_type)
       (return 
-        (name_resolution 
-          (identifier) 
-          (identifier))))))
+        (bin_expr (identifier) (integer))))))
 
-======
-namespace resolution
-======
-life :: () -> u32 { return position.x; }
------
+===
+bools
+===
 
-(source_file
-  (declaration
-    (identifier)
-    (function 
-      (int_type) 
-      (return 
-        (field_resolution 
-          (identifier) 
-          (identifier))))))
+perform :: (user: User, ff: bool) -> bool {
+  return user.premium && ff;
+}
 
-======
-method call
-======
-life :: () -> u32 { return position.distance(); }
------
+---
 
 (source_file
   (declaration
     (identifier)
-    (function 
-      (int_type) 
+    (function
+      (identifier)
+      (identifier_type (identifier))
+      (identifier)
+      (bool_type)
+      (bool_type)
       (return 
-        (call
-          (field_resolution 
-            (identifier) 
-            (identifier)))))))
-
-
-======
-function call
-======
-life :: () -> u32 { return math.log2(8); }
------
-
-(source_file
-  (declaration
-    (identifier)
-    (function 
-      (int_type) 
-      (return 
-        (call
-          (field_resolution 
-            (identifier) 
-            (identifier))
-          (integer))))))
+        (bin_expr (field_resolution (identifier) (identifier)) (identifier))))))
 

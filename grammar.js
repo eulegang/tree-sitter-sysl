@@ -7,6 +7,30 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
+const PREC = {
+  PAREN_DECLARATOR: -10,
+  ASSIGNMENT: -2,
+  CONDITIONAL: -1,
+  DEFAULT: 0,
+  LOGICAL_OR: 1,
+  LOGICAL_AND: 2,
+  INCLUSIVE_OR: 3,
+  EXCLUSIVE_OR: 4,
+  BITWISE_AND: 5,
+  EQUAL: 6,
+  RELATIONAL: 7,
+  OFFSETOF: 8,
+  SHIFT: 9,
+  ADD: 10,
+  MULTIPLY: 11,
+  CAST: 12,
+  SIZEOF: 13,
+  UNARY: 14,
+  CALL: 15,
+  FIELD: 16,
+  SUBSCRIPT: 17,
+};
+
 export default grammar({
   name: "sysl",
 
@@ -336,6 +360,9 @@ export default grammar({
       $.name_resolution,
       $.field_resolution,
       $.call,
+      $.bin_expr,
+      $.assign_expr,
+      $.unary_expr,
     ),
 
     name_resolution: $ =>
@@ -358,6 +385,61 @@ export default grammar({
         ),
         ')',
       ),
+
+    bin_expr: $ => {
+      const table = [
+        ['+', PREC.ADD],
+        ['-', PREC.ADD],
+        ['*', PREC.MULTIPLY],
+        ['/', PREC.MULTIPLY],
+        ['%', PREC.MULTIPLY],
+        ['||', PREC.LOGICAL_OR],
+        ['&&', PREC.LOGICAL_AND],
+        ['|', PREC.INCLUSIVE_OR],
+        ['^', PREC.EXCLUSIVE_OR],
+        ['&', PREC.BITWISE_AND],
+        ['==', PREC.EQUAL],
+        ['!=', PREC.EQUAL],
+        ['>', PREC.RELATIONAL],
+        ['>=', PREC.RELATIONAL],
+        ['<=', PREC.RELATIONAL],
+        ['<', PREC.RELATIONAL],
+        ['<<', PREC.SHIFT],
+        ['>>', PREC.SHIFT],
+      ];
+
+      return choice(...table.map(([operator, precedence]) => {
+        return prec.left(precedence, seq(
+          field('left', $._expr),
+          // @ts-ignore
+          field('operator', operator),
+          field('right', $._expr),
+        ));
+      }));
+    },
+
+    assign_expr: $ => prec.right(PREC.ASSIGNMENT, seq(
+      field('left', $._expr),
+      field('operator', choice(
+        '=',
+        '*=',
+        '/=',
+        '%=',
+        '+=',
+        '-=',
+        '<<=',
+        '>>=',
+        '&=',
+        '^=',
+        '|=',
+      )),
+      field('right', $._expr),
+    )),
+
+    unary_expr: $ => prec.left(PREC.UNARY, seq(
+      field('operator', choice('!', '~', '-', '+')),
+      field('argument', $._expr),
+    )),
 
     comment: $ =>
       token(
