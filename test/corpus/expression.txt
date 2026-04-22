@@ -40,3 +40,68 @@ perform :: (user: User, ff: bool) -> bool {
       (return 
         (bin_expr (field_resolution (identifier) (identifier)) (identifier))))))
 
+===
+dereference
+===
+
+deref :: (x: *u32) -> u32 {
+  return *x;
+}
+
+---
+
+(source_file
+  (declaration
+    (identifier)
+    (function
+      (identifier)
+      (ptr_type (int_type))
+      (int_type)
+      (return 
+        (ptr_expr (identifier))))))
+
+===
+dereference
+===
+
+id :: (user: *User) -> *u32 {
+  return &user.id;
+}
+
+---
+
+(source_file
+  (declaration
+    (identifier)
+    (function
+      (identifier)
+      (ptr_type (identifier_type (identifier)))
+      (ptr_type (int_type))
+      (return 
+        (ptr_expr (field_resolution (identifier) (identifier)))))))
+
+===
+dereference string
+===
+
+let msg: *u8 = "hello world";
+
+h :: () -> u8 {
+  return *msg;
+}
+
+---
+
+(source_file
+  (constant 
+    (identifier) 
+    (ptr_type (int_type)) 
+    (string_literal (string_content)))
+
+  (declaration
+    (identifier)
+    (function
+      (int_type)
+      (return 
+        (ptr_expr (identifier))))))
+

@@ -179,6 +179,7 @@ export default grammar({
       $.identifier_type,
       $.func_type,
       $.void_type,
+      $.ptr_type,
     ),
 
     void_type: $ => 'void',
@@ -194,13 +195,13 @@ export default grammar({
       'u64',
     ),
 
-    // /(i|u)(8|16|32|64)/,
     bool_type: $ => "bool",
     float_type: $ => choice(
       "f32",
       "f64",
     ),
     slice_type: $ => seq('[]', $._type),
+    ptr_type: $ => seq('*', $._type),
 
     identifier_type: $ => seq($.identifier, repeat(seq('::', $.identifier))),
 
@@ -380,6 +381,8 @@ export default grammar({
       $.bin_expr,
       $.assign_expr,
       $.unary_expr,
+      $.ptr_expr,
+      $.string_literal,
     ),
 
     name_resolution: $ =>
@@ -457,6 +460,26 @@ export default grammar({
       field('operator', choice('!', '~', '-', '+')),
       field('argument', $._expr),
     )),
+
+    ptr_expr: $ => prec.left(PREC.CAST, seq(
+      field('operator', choice('*', '&')),
+      field('argument', $._expr),
+    )),
+
+    string_literal: $ => seq(
+      choice('L"', 'u"', 'U"', 'u8"', '"'),
+      repeat(choice(
+        alias(token.immediate(prec(1, /[^\\"\n]+/)), $.string_content),
+        $.escape_sequence,
+      )),
+      '"',
+    ),
+
+    escape_sequence: _ => token(prec(1, seq(
+      '\\',
+      /x[0-9a-fA-F]{1,4}/,
+    ))),
+
 
     comment: $ =>
       token(
